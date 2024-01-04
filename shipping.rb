@@ -33,7 +33,7 @@ class CargoTransportation
 
   def calculate_distance
     url = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins=#{@origin}&destinations=#{@destination}&key=qYVkigBgTjUoo64hulZq3tXwbR5YY4iBaNuQLkFBHeVnCijfKf21edLeCfCyFUMV"
-    response = HTTParty .get(url)
+    response = HTTParty.get(url)
     result = JSON.parse(response.body)
     @distance = result['rows'][0]['elements'][0]['distance']['value'] / 1000.0
   end
