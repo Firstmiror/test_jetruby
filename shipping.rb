@@ -46,7 +46,7 @@ class CargoTransportation
     elsif volume >= 1 && @weight <= 10
       @price = @distance * 2
     elsif volume >= 1 && @weight > 10
-      @price = distance * 3
+      @price = @distance * 3
     end
   end
 
@@ -56,18 +56,18 @@ class CargoTransportation
       length: @length,
       width: @width,
       height: @height,
-      distance: @distance.round(1),
-      price: @price.round(1)
+      distance: @distance,
+      price: @price
     }
   end
 end
 
 # Usage example
-cargo = CargoTransportation.new
+# cargo = CargoTransportation.new
 
-cargo.input_cargo_params
-cargo.input_destination_params
-cargo.calculate_distance
-cargo.calculate_price
+# cargo.input_cargo_params
+# cargo.input_destination_params
+# cargo.calculate_distance
+# cargo.calculate_price
 
-puts cargo.result
+# puts cargo.result
