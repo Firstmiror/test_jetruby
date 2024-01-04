@@ -31,11 +31,11 @@ class CargoTransportation
     @destination = gets.chomp
   end
 
-  def calculate_disnance
-    url = "http://api.distancematrix.ai/maps/api/dastancematrix/json?origins=#{@origin}&destinations=#{@destination}"
+  def calculate_distance
+    url = "https://api.distancematrix.ai/maps/api/distancematrix/json?origins=#{@origin}&destinations=#{@destination}&key=qYVkigBgTjUoo64hulZq3tXwbR5YY4iBaNuQLkFBHeVnCijfKf21edLeCfCyFUMV"
     response = HTTParty .get(url)
     result = JSON.parse(response.body)
-    @distance = result['rows'][0]['elements'][0]['distance']['value']
+    @distance = result['rows'][0]['elements'][0]['distance']['value'] / 1000.0
   end
 
   def calculate_price
@@ -54,10 +54,20 @@ class CargoTransportation
     {
       weight: @weight,
       length: @length,
-      width: @weight,
+      width: @width,
       height: @height,
-      distance: @distance,
-      price: @price
+      distance: @distance.round(1),
+      price: @price.round(1)
     }
   end
 end
+
+# Usage example
+cargo = CargoTransportation.new
+
+cargo.input_cargo_params
+cargo.input_destination_params
+cargo.calculate_distance
+cargo.calculate_price
+
+puts cargo.result
